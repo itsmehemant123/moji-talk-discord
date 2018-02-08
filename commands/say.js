@@ -18,8 +18,7 @@ const emojis = Object.keys(emojiMap);
 class SayCommand extends Command {
     constructor() {
         super('say', {
-            aliases: ['say'],
-            ownerOnly: true
+            aliases: ['say']
         });
     }
 

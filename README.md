@@ -23,10 +23,11 @@ npm install
 
 ### Running the bot
 
+- Replace the `ownerID` at L12 in `moji-talk.js` with your discord secret id.
 - Run bot with:
 
 ```
-node moji-bot.js
+node moji-talk.js
 ```
 
 _Thanks to https://hackernoon.com/how-i-made-a-talking-emoji-using-regular-emojis-and-javascript-fe20e62ba10_
