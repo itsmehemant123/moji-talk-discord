@@ -2,6 +2,10 @@
 
 Discord bot which talks in emoji.
 
+_This, but for discord!_
+
+![Moji Talk Original](https://cdn-images-1.medium.com/max/1600/0*7MYc3zjcC4QKsXi1.)
+
 ## Instructions to host bot
 
 ### Getting the Credentials
