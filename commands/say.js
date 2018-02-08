@@ -1,7 +1,7 @@
 const { Command } = require('discord-akairo');
 var logger = require('winston');
 
-const delay = 200;
+const delay = 500;
 const emojiMap = {
     "😮": ["o", "e"],
     "😐": ["b", "p", "m"],
@@ -26,16 +26,29 @@ class SayCommand extends Command {
     exec(message) {
         var lowerCaseMsg = message.content.replace('!say', '').toLowerCase();
         logger.info('TRIGE:', lowerCaseMsg);
+        const start = Date.now();
 
         message.channel.send(defaultEmoji).then(msgHandle => {
-            setInterval(_ => {
-                logger.info('EDITING');
-                const character = lowerCaseMsg[Math.floor(new Date / delay) % (lowerCaseMsg.length + 1)];
-                msgHandle.edit((Object.keys(emojiMap).find(emoji => emojiMap[emoji].includes(character)) || defaultEmoji) + '  ' + character);
+            const intervalHandle = setInterval(_ => {
+                const index = Math.floor((Date.now() - start) / delay) % (lowerCaseMsg.length + 1);
+                if (index == lowerCaseMsg.length - 1) {
+                    clearInterval(intervalHandle);
+                }
+                const currentEmoji = this.resolveCharacter(index, lowerCaseMsg) || defaultEmoji;
+                const words = lowerCaseMsg.substr(0, index).split(' ');
+
+                msgHandle.edit(currentEmoji);
             }, delay);
         }).catch(function (err) {
             logger.error('ERROR: ', err);
         });
+    }
+
+    resolveCharacter(index, message) {
+        const character = message[index];
+        const previousDouble = message.substr(index - 1, index + 1);
+        const nextDouble = message.substr(index, index + 2);
+        return emojis.find(e => emojiMap[e].indexOf(previousDouble) !== -1) || emojis.find(e => emojiMap[e].indexOf(nextDouble) !== -1) || emojis.find(e => emojiMap[e].indexOf(character) !== -1);
     }
 }
 

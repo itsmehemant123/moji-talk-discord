@@ -25,4 +25,4 @@ npm install
 node moji-bot.js
 ```
 
-_Thanks to from https://hackernoon.com/how-i-made-a-talking-emoji-using-regular-emojis-and-javascript-fe20e62ba10_
+_Thanks to https://hackernoon.com/how-i-made-a-talking-emoji-using-regular-emojis-and-javascript-fe20e62ba10_
