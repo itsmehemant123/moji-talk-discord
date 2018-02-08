@@ -1,0 +1,25 @@
+{
+  "name": "moji-talk-discord",
+  "version": "1.0.0",
+  "description": "Text -> talking emojis!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsmehemant123/moji-talk-discord.git"
+  },
+  "author": "hemanth",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/itsmehemant123/moji-talk-discord/issues"
+  },
+  "homepage": "https://github.com/itsmehemant123/moji-talk-discord#readme",
+  "dependencies": {
+    "discord-akairo": "^7.5.4",
+    "discord.js": "^11.3.0",
+    "twemoji": "^2.5.0",
+    "winston": "^2.4.0"
+  }
+}
