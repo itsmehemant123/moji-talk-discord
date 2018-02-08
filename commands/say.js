@@ -1,5 +1,6 @@
 const { Command } = require('discord-akairo');
 var logger = require('winston');
+var twemoji = require('twemoji');
 
 const delay = 500;
 const emojiMap = {
@@ -27,7 +28,7 @@ class SayCommand extends Command {
         logger.info('TRIGE:', lowerCaseMsg);
         const start = Date.now();
 
-        message.channel.send(defaultEmoji).then(msgHandle => {
+        message.channel.send({embed: this.getEmbed(defaultEmoji, 'HERE I GO!')}).then(msgHandle => {
             const intervalHandle = setInterval(_ => {
                 const index = Math.floor((Date.now() - start) / delay) % (lowerCaseMsg.length + 1);
                 if (index == lowerCaseMsg.length - 1) {
@@ -36,7 +37,9 @@ class SayCommand extends Command {
                 const currentEmoji = this.resolveCharacter(index, lowerCaseMsg) || defaultEmoji;
                 const words = lowerCaseMsg.substr(0, index).split(' ');
 
-                msgHandle.edit(currentEmoji);
+                const msg = this.getEmbed(currentEmoji, lowerCaseMsg[index]);
+
+                msgHandle.edit({embed: msg});
             }, delay);
         }).catch(function (err) {
             logger.error('ERROR: ', err);
@@ -48,6 +51,21 @@ class SayCommand extends Command {
         const previousDouble = message.substr(index - 1, index + 1);
         const nextDouble = message.substr(index, index + 2);
         return emojis.find(e => emojiMap[e].indexOf(previousDouble) !== -1) || emojis.find(e => emojiMap[e].indexOf(nextDouble) !== -1) || emojis.find(e => emojiMap[e].indexOf(character) !== -1);
+    }
+
+    getEmbed(emoji, word) {
+        // const emojiImg = twemoji.parse(
+        //     emoji
+        // );
+        // const emojiUrl = emojiImg.substr(emojiImg.indexOf('src') + 5).slice(0, -3);
+        return {
+            "title": word,
+            "description": emoji,
+            "footer": {
+                "icon_url": "https://cdn.discordapp.com/avatars/154539912253800449/88f09f154f63fb67dd8a9d22f78d3844.png?size=32",
+                "text": "<- ping lyric for stuff about me"
+            }
+        };
     }
 }
 
